@@ -117,7 +117,10 @@ sympy-plots-for-*.tex/
 
 # todonotes
 *.tdo
+
+# repository build products
 relClauses-draft5.pdf
+LowerFungomLanguagesMap.pdf
 
 # xindy
 *.xdy

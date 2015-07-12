@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[10pt]{article}
 
 \usepackage[tone]{tipa}
 %ADDED PACKAGE:
@@ -10,7 +10,7 @@
 \usepackage[tipa]{ucs}
 \usepackage[utf8x]{inputenc}
 \usepackage{graphicx}	%pdftex option clashes with xelatex
-\usepackage[text={6.5in,9.5in}, papersize={8.5in,11.55in}, centering]{geometry}
+\usepackage[text={10cm,17cm}, papersize={15.5cm,23cm}, centering]{geometry}
 \usepackage[normalem]{ulem} 
 
 \usepackage[stable]{footmisc}	%	this package lets you put a footnote mark in a
@@ -23,7 +23,9 @@
 
 %ADDED PACKAGE:
 %IPA doesn't work without this one
-\setromanfont[Mapping=tex-text,Renderer=ICU]{Charis SIL}
+\setromanfont[Mapping=tex-text]{EB Garamond}
+%\setromanfont[Mapping=tex-text]{Essays1743}
+\newfontfamily{\ipaFont}[Mapping=tex-text,Renderer=ICU]{Charis SIL}
 \newcommand{\url}[1]{\texttt{#1}}
 % Formatting
 \newfontfamily\citationfont[FakeBold=2.0]{Charis SIL}
@@ -31,7 +33,7 @@
 \newcommand{\lmss}{\fontfamily{lmss}\selectfont} % Latin Modern Sans
 \newcommand{\lmtt}{\fontfamily{lmtt}\selectfont} % Latin Modern Mono
 \renewcommand{\textsl}[1]{\tikz[baseline=(X.base)] \node[xslant=0.2231153] (X) {#1};} % http://stackoverflow.com/questions/1289439/how-do-i-fake-slanted-text-in-latex
-\def\ci{\textit}
+\def\ci#1{{\ipaFont #1}}
 \def\xci{\textbf}
 \def\sn{\textbf}
 %\def\gl{}
@@ -71,8 +73,10 @@
 \def\til{\raise.17ex\hbox{$\scriptstyle\mathtt{\sim}$}}	% tilde for reduplicant boundary
 
 % Tones
-\newcommand\HM[1]{\ipaclap{#1}{\rotatebox{180}{\emph{\raisebox{-.76em}{\texthighrise{}}}}}}
-\newcommand\ML[1]{\ipaclap{#1}{\rotatebox{180}{\emph{\raisebox{-.76em}{\textlowrise{}}}}}}
+\def\ML#1{#1\symbol{"1DC6}} % more elegant definition taking advantage of Charis SIL & XeTeX
+\def\HM#1{#1\symbol{"1DC7}}
+%\newcommand\HM[1]{\ipaclap{#1}{\rotatebox{180}{\emph{\raisebox{-.76em}{\texthighrise{}}}}}}
+%\newcommand\ML[1]{\ipaclap{#1}{\rotatebox{180}{\emph{\raisebox{-.76em}{\textlowrise{}}}}}}
 \newcommand\MH{\texthighrise}
 \def\LM{\textlowrise}
 \def\LL{\textdoublegrave}
@@ -109,6 +113,9 @@
 \def\mf{\textltailm}
 \def\t{\texttoptiebar}
 \def\var{\kern 0em\lower .7ex\hbox{\~{}}\kern .04em}
+
+% use Charis SIL in ILGs
+\renewcommand*\eachwordone{\ipaFont}
 
 %ADDED COMMAND:
 %for comments in color:
@@ -372,10 +379,10 @@ dialect of Mungbam.
 \Hline
 Mundabli	&	Munken		&	gloss		&	Mundabli&	Munken		&	gloss			\\
 \hline
-gb{\=\aw}	&	\'u-kp\H{e}	&	\gl{\cl3.house}	&	dz\=\aw	&	\'\i-kp\H{e}	&	\gl{\cl4.houses}	\\
-y\H{\ih}	&	\'\i-dz\H{\eh}h\eh&	\gl{\cl5.eye}	&	y\H{\ih}&	\'a-dz\H{\eh}h\eh&	\gl{\cl7/\cl6.eyes}	\\
-k\=\oo		&	\`a-k\ML{\@}f\@	&	\gl{\cl7/\cl12.bone}&	k\=\oo	&	b\=\i-k\ML{\@}f\@&	\gl{\cl8.bones}		\\	% 26-may-2008 jcg tape
-\dzh\v{u}	&	\`\i-b\'e	&	\gl{\cl9.goat}	&	\dzh\H{u}&	\'\i-b\H{e}	&	\gl{\cl10.goat}		\\
+\ci{gb{\=\aw}}	&	\ci{\'u-kp\H{e}}	&	\gl{\cl3.house}	&	\ci{dz\=\aw}	&	\ci{\'\i-kp\H{e}}	&	\gl{\cl4.houses}	\\
+\ci{y\H{\ih}}	&	\ci{\'\i-dz\H{\eh}h\eh} &	\gl{\cl5.eye}	&	\ci{y\H{\ih}}	&	\ci{\'a-dz\H{\eh}h\eh}	&	\gl{\cl7/\cl6.eyes}	\\
+\ci{k\=\oo}		&	\ci{\`a-k\ML{\@}f\@}	&	\gl{\cl7/\cl12.bone}	&	\ci{k\=\oo}	&	\ci{b\=\i-k\ML{\@}f\@}	&	\gl{\cl8.bones}		\\	% 26-may-2008 jcg tape
+\ci{\dzh\v{u}}	&	\ci{\`\i-b\'e}	&	\gl{\cl9.goat}	&	\ci{\dzh\H{u}}	&	\ci{\'\i-b\H{e}}	&	\gl{\cl10.goat}		\\
 \Hline
 \end{tabular}
 \caption{Forms illustrating the loss of segmental noun class prefixes in Mundabli vs.
@@ -426,19 +433,19 @@ here (but see~\cite{voll:verbs} for details).
 \Hline
         &                       &       {\sc pfv}       &       {\sc ipfv}      \\
 \hline
-A       &       {\sc realis}    &       \`x             &       \`x $+$ {\sc abl}       \\
-        &       {\sc irr}       &       \={x}           &       \={x} $+$ {\sc abl}     \\
+A       &       {\sc realis}    &       \ci{\`x}             &       \ci{\`x} $+$ {\sc abl}       \\
+        &       {\sc irr}       &       \ci{\={x}}           &       \ci{\={x}} $+$ {\sc abl}     \\
 \hline
-B       &       {\sc realis}    &       \H{x}           &       \^x $+$ {\sc abl}       \\
-        &       {\sc irr}       &       \ML{x}          &       \'{x} $+$ {\sc abl}     \\
+B       &       {\sc realis}    &       \ci{\H{x}}           &       \ci{\^x} $+$ {\sc abl}       \\
+        &       {\sc irr}       &       \ci{\ML{x}}          &       \ci{\'{x}} $+$ {\sc abl}     \\
 \hline
-C       &       {\sc realis}    &       \^x             &       \^x $+$ {\sc abl}       \\
-        &       {\sc irr}       &       \'{x}           &       \'{x} $+$ {\sc abl}     \\
+C       &       {\sc realis}    &       \ci{\^x}             &       \ci{\^x} $+$ {\sc abl}       \\
+        &       {\sc irr}       &       \ci{\'{x}}           &       \ci{\'{x}} $+$ {\sc abl}     \\
 \Hline
 \end{tabular}
 \caption{Verb conjugation in Mungbam. Tone diacritics are interpreted as
-follows: \`x $=$ L, \={x} $=$ M, \={x}\`{} $=$ ML, \'{x} $=$ H, \^{x} $=$ HL,
-\H{x} $=$ S(uperhigh). {\sc abl}$=$ `ablaut'.
+follows: \ci{\`x} $=$ L, \ci{\={x}} $=$ M, \ci{\ML{x}} $=$ ML, \ci{\'{x}} $=$ H, \ci{\^{x}} $=$ HL,
+\ci{\H{x}} $=$ S(uperhigh). {\sc abl}$=$ `ablaut'.
 On disyllabic verbs, the patterns are identical, with the pitch modulation
 spread across the two syllables.}
 \label{tblConjugation}
@@ -497,7 +504,7 @@ the following formally distinct possibilities available:
 
 	Dative-marked arguments in Mungbam and Mundabli overlap in function somewhat with
 	arguments licensed by reflexes
-	of the verbal suffix *-\textit{\ih{}l}- in Narrow Bantu
+	of the verbal suffix \ci{*-\ih{}l-} in Narrow Bantu
 	languages, commonly called ``applicative,'' though called ``dative'' by \citepage{schadeberg:2003}{74}.
 	In referring to the grammatical function in
 	Mungbam and Mundabli, we prefer the latter term,
@@ -520,16 +527,16 @@ our discussion of accessibility.
 
 \fbox{Transcription} symbols used in the examples are mostly consistent
 with the corresponding IPA symbols, with a few minor exceptions. 
-The use of the [\textsubumlaut{x}] diacritic, normally reserved to indicate breathy voice,
+The use of the \ci{[\textsubumlaut{x}]} diacritic, normally reserved to indicate breathy voice,
 is used to indicate what has been described as pharyngealisation of
 vowels in Mundabli. 
-Also, the symbol [y] indicate a palatal glide in Mundabli. 
-In Mungbam a palatal glide is indicated by the IPA symbol [j]. Additionally, we prefer to use the now outdated
-symbol~[\,\scalebox{1.5}{{\ih}}\,] rather than the currently-recommended~[\,\scalebox{1.5}{{\tp{I}}}\,]
+Also, the symbol \ci{[y]} indicate a palatal glide in Mundabli. 
+In Mungbam a palatal glide is indicated by the IPA symbol \ci{[j]}. Additionally, we prefer to use the now outdated
+symbol~\ci{[\,\scalebox{1.5}{{\ih}}\,]} rather than the currently-recommended~\ci{[\,\scalebox{1.5}{{\tp{I}}}\,]}
 to transcribe a high, front, unrounded root-retracted vowel, simply
 for the reason that when tone diacritics are included,
 the latter symbol is easily confused with
-dotless~[\,\scalebox{1.5}{{\i}}\,]. 
+dotless~\ci{[\,\scalebox{1.5}{{\i}}\,]}. 
 %In Mungbam, the vowel transcribed with this
 %symbol is lower than cardinal~[\,\ci{\ih}\,] (and lower than
 %Mungbam /e/), though in Mundabli
@@ -705,7 +712,7 @@ which have concordant relativizers,\footnotemark\/
 Noni (Beboid) \citepp{hyman:1981}{91}, Bafut (Ngemba) \citepp{tamanji:2009}{96--7}.
 Mankon (Bamil\'ek\'e) \citepp{leroy:2007}{415}, and
 Ngwe (Bamil\'ek\'e) \citepp{nkemnji:1995}{77}. An exception is 
-the Bamil\'ek\'e language Fe{\textraiseglotstop}Fe{\textraiseglotstop} \citepp{chumbow:1977}{289},
+the Bamil\'ek\'e language Fe{\ci\textraiseglotstop}Fe{\ci\textraiseglotstop} \citepp{chumbow:1977}{289},
 which otherwise has lost much of its concord morphology \citepp{hyman:1972}{\S{VII}}.}
 but they also can offer a clue
 %
@@ -810,11 +817,11 @@ translatable as~\gl{lest}.}
 \Hline
 variety	&	relativizer	&	\gl{some, another}	&\gl{reason}	&	\gl{own} (associative)\\
 \hline
-Munken	&	n\'{\@}		&	-l\eh			&\mbox{\'a-mj\H{u}}	&-\ny\@{m\@}				\\
-Ngun	&	n\'{\ih}	&	-ne			&k\'{\@}-mj\H{\ih}	&					\\	%9/11 22-apr-2010
-Biya	&	-n\ih		&	-n\ih			&k\'{\@}-mj\H{\ih}	&-kj\ih					\\
-Abar	&	\ny\'\i		&	-lehe			&k\'{\@}-\ny\H{u} 	&-\ny{i}				\\
-Missong	&	n\'a		&	-l\eh			&k\'\i-n\H{a}		&-n\={\@}			\\	%83v
+Munken	&	\ci{n\'{\@}}		&	\ci{-l\eh}			&\ci{\'a-mj\H{u}}	&\ci{-\ny\@{m\@}}				\\
+Ngun	&	\ci{n\'{\ih}}	&	\ci{-ne}			&\ci{k\'{\@}-mj\H{\ih}}	&					\\	%9/11 22-apr-2010
+Biya	&	\ci{-n\ih}		&	\ci{-n\ih}			&\ci{k\'{\@}-mj\H{\ih}}	&\ci{-kj\ih}					\\
+Abar	&	\ci{\ny\'\i}		&	\ci{-lehe}			&\ci{k\'{\@}-\ny\H{u}} 	&\ci{-\ny{i}}				\\
+Missong	&	\ci{n\'a}		&	\ci{-l\eh}			&\ci{k\'\i-n\H{a}}		&\ci{-n\={\@}}			\\	%83v
 \Hline
 \end{tabular}
 \caption{Forms of relativizer, and of three suspected grammaticalization
@@ -1389,9 +1396,9 @@ N. \cl10-goat \cl10.{\sc det} {\sc vfoc}\til{a.slaughter}	\\
 %%%
 \ex \label{exBiya1046}
 \begin{xlist}
-\ex *N\H{a}{\ng} gb\`e
+\ex \ci{*N\H{a}{\ng} gb\`e}
 %\ex *N\H{a}{\ng} f\H{\@}fj\^{\aw}{\ng} gb\`e	
-\ex *N\H{a}{\ng} \'\i-bw\H{e} j\={\i} k\`{\@}m
+\ex \ci{*N\H{a}{\ng} \'\i-bw\H{e} j\={\i} k\`{\@}m}
 \end{xlist}
 \end{exe}
 %%
@@ -1403,7 +1410,7 @@ The ban on reduplication in negated clauses is illustrated in~\pref{exAbar1041}.
 \ex	\gll N\H{a}{\ng} \'a b\'am h\={\aw}	\\
 N. {\sc neg} c.ascend.{\sc irr} {\sc neg}	\\
 \glt ``Nang did not accept.'' (Abar) %19
-\ex	*N\H{a}{\ng} \'a b\'um{\til}b\=am h\={\aw}	 
+\ex	\ci{*N\H{a}{\ng} \'a b\'um{\til}b\=am h\={\aw}}	 
 \end{xlist}
 \end{exe}
 
@@ -1430,9 +1437,9 @@ N. a.slaughter \cl10-goat \cl10.{\sc det} {\sc loc.}stream	\\
 \ex \label{mg1048}
 \begin{xlist}
 \ex \label{mg1048a}
-*\`a gb\`u{\til}{gb\ML{e}} N\H{a}{\ng}	
+\ci{*\`a gb\`u{\til}{gb\ML{e}} N\H{a}{\ng}	}
 \ex \label{mg1048b}
-N\H{a}{\ng} k\Lbi{\ng}{\til}k\ML{\@}m \'\i-bw\H{e} j\={\i} f\H{\@}fj\^{\aw}{\ng}	
+\ci{N\H{a}{\ng} k\Lbi{\ng}{\til}k\ML{\@}m \'\i-bw\H{e} j\={\i} f\H{\@}fj\^{\aw}{\ng}	}
 \end{xlist}
 \end{exe}
 %%
