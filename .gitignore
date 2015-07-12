@@ -117,6 +117,7 @@ sympy-plots-for-*.tex/
 
 # todonotes
 *.tdo
+relClauses-draft5.pdf
 
 # xindy
 *.xdy
