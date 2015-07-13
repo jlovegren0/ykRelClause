@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[10pt,twoside]{article}
 
 \usepackage[tone]{tipa}
 %ADDED PACKAGE:
@@ -17,6 +17,19 @@
 				%	section title.	
 % LaTeX was unhappy if this was not loaded last.
 \usepackage{gb4e}
+%
+
+
+%%%%%%%%%%%% header
+\usepackage{fancyhdr} % customize page header
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{#1}}%
+\fancyhf{} % clear headers and footers
+\fancyhead[LE]{\thepage\hskip0.25em\relax--\hskip0.25em\relax\itshape Jesse Lovegren \& Rebecca Voll\rm}
+\fancyhead[RO]{\itshape Relative clause constructions in two Yemne-Kimbi languages --\rm\hskip0.25em\relax\thepage}
+%\fancyhfoffset[RO,LE,LO,RE]{0em}
+%\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrulewidth}{0pt}
 
 % For latext2rtf compatibility comment out
 \newenvironment{subexample}{}
@@ -26,12 +39,13 @@
 \setromanfont[Mapping=tex-text]{EB Garamond}
 %\setromanfont[Mapping=tex-text]{Essays1743}
 \newfontfamily{\ipaFont}[Mapping=tex-text,Renderer=ICU]{Charis SIL}
-\newcommand{\url}[1]{\texttt{#1}}
+%\newcommand{\url}[1]{\texttt{#1}}
 % Formatting
 \newfontfamily\citationfont[FakeBold=2.0]{Charis SIL}
 \newcommand{\lmr}{\fontfamily{lmr}\selectfont} % Latin Modern Roman
 \newcommand{\lmss}{\fontfamily{lmss}\selectfont} % Latin Modern Sans
 \newcommand{\lmtt}{\fontfamily{lmtt}\selectfont} % Latin Modern Mono
+\newfontfamily{\purisa}{Purisa}
 \renewcommand{\textsl}[1]{\tikz[baseline=(X.base)] \node[xslant=0.2231153] (X) {#1};} % http://stackoverflow.com/questions/1289439/how-do-i-fake-slanted-text-in-latex
 \def\ci#1{{\ipaFont #1}}
 \def\xci{\textbf}
@@ -82,6 +96,7 @@
 \def\LL{\textdoublegrave}
 
 % Special characters
+\def\KrnF{f\kern0.8pt{}} % for an f preceding a vowel with a left-spilling diacritic
 %\newcommand\Lbi{\ipabar{\tipaencoding \`\i}{.5ex}{1.1}{}{}}
 \newcommand\Lbi{\ipabar{\ipaclap{\i}{\rotatebox{0}{\emph{\raisebox{.06em}{\`{}}}}}}{.5ex}{1.1}{}{}}
 \newcommand\Hbi{\ipabar{\ipaclap{\i}{\rotatebox{0}{\emph{\raisebox{.06em}{\'{}}}}}}{.5ex}{1.1}{}{}}
@@ -194,6 +209,11 @@
 
 
 
+\usepackage{hyperref}
+% get rid of borders on links
+\hypersetup{colorlinks=false,
+	pdfborder = {0 0 0},
+}
 %To anonymize
 %\def\Good{the first author\xspace}
 %\def\Lovegren{the second author\xspace}
@@ -206,7 +226,7 @@
 
 \title{Relative clause constructions in two Yemne-Kimbi languages}
 \author{Jesse Lovegren and Rebecca Voll}
-\date{\fbox{{\lmtt [version:~\today]}}}
+\date{{\purisa last updated \today}}
 \begin{document}
 
 %ADDED THIS
@@ -218,7 +238,8 @@
 \section{Introduction\footnotemark}\label{secIntroduction}
 %
 \footnotetext{This work was made possible by support from 
-NSF grant BSC-0853981, University at Buffalo College of Arts and Sciences Humanities Institute, Leiden University Fund and Leiden University Centre for Linguistics at Leiden University.
+NSF grant BSC-0853981, University at Buffalo College of Arts and
+Sciences Humanities Institute, Leiden University Fund and Leiden University Centre for Linguistics at Leiden University.
 Thanks to Jeff Good for
 helpful comments on earlier drafts of this paper. We owe a special
 debt to a large number of language consultants who provided data,
@@ -288,7 +309,7 @@ Northwest Region near the Nigerian border known as Lower Fungom. As can be seen 
 in figure~\ref{lfmap} \citepp{dicarlo:2011}{57}, no more than 10km separates
 Mundabli from the most distant of the Mungbam villages. 
 
-The acronym \gl{Mungbam}, 
+The acronym ``{Mungbam}'', 
 associated with ISO~693-3 code~[mij], is used to refer to the speech varieties used
 predominantly
 in the villages of \uline{Mu}nken, \uline{Ng}un, \uline{B}iya,
@@ -519,8 +540,8 @@ our discussion of accessibility.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[p]
 \centering
-\includegraphics[width=5in]{LowerFungomLanguagesMap.pdf}
-\caption{Lower Fungom and surrounding area}\label{lfmap}
+\includegraphics[width=10cm]{LowerFungomLanguagesMap.pdf}
+\caption{Lower Fungom and surrounding area \citep{good:inprep}.}\label{lfmap}
 \end{figure}%%%
 
 \subsection{Notes on terminology and transcription}\label{secTerminology}
@@ -944,7 +965,7 @@ presence of a preceding vowel.}
 %
 
 Example~(\ref{mg030}) contains a relative clause where the representative nominal
-\fbox{may or may not appear} as the object of the locative phrase~\ci{\'a\dots m\=\i}~\gl{inside of\dots}.
+may or may not appear as the object of the locative phrase~\ci{\'a\dots m\=\i}~\gl{inside of\dots}.
 As~\pref{mg030} shows, locative phrases may be~``stranded'' in relative clauses.
 Object-less locative phrases, however, are grammatical in main clauses as well
 (see~\pref{exMunkenDresses}, below).
@@ -2496,7 +2517,7 @@ of a contact scenario, since a similar marking feature is witnessed in the neigh
 language Naki. 
 The ultimate source of this feature, however, remains unclear
 in light of the fact that in the other Beboid languages for which
-data are available, Noni \citepp{hyman:1981}{91--4}, and
+data are available, Noni \citepp{hyman:1981}{91--94}, and
 Nchane \citepp{boutwell:2010}{18--9}, no such post-verbal particle is
 found. 
 
