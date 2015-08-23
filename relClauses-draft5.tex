@@ -38,8 +38,7 @@
 %IPA doesn't work without this one
 \setromanfont[Mapping=tex-text]{EB Garamond}
 %\setromanfont[Mapping=tex-text]{Essays1743}
-\newfontfamily{\ipaFont}[Mapping=tex-text,Renderer=ICU]{Charis SIL}
-%\newcommand{\url}[1]{\texttt{#1}}
+\newfontfamily{\ipaFont}[Mapping=tex-text,Renderer=ICU,Scale=MatchLowercase]{Charis SIL}
 % Formatting
 \newfontfamily\citationfont[FakeBold=2.0]{Charis SIL}
 \newcommand{\lmr}{\fontfamily{lmr}\selectfont} % Latin Modern Roman
@@ -60,18 +59,25 @@
 \newcommand{\cl}[1]{{\sc cl#1}}
 %\renewcommand{\s}[1]{\sc \MakeLowercase{#1}}
 % citation commands
-\newcommand{\citepage}[2]{\citeauthor{#1}~{(\citeyear{#1}:\,{#2})}}
-\newcommand{\citepp}[2]{(\citealp{#1}:\,{#2})}
-\newcommand{\citeA}[1]{\citeauthor{#1}~(\citeyear{#1})}
-\newcommand{\citeps}[2]{\citeauthor{#1}{'}s~{(\citeyear{#1}:\,{#2})}}
-\newcommand{\cites}[1]{\citeauthor{#1}'s~(\citeyear{#1})}
-\newcommand{\citeyearpage}[2]{\hbox{(\citeyear{#1}:\,{#2})}}
-\newcommand{\citeslashpage}[3]{\citeauthor{#1}~{(#2/\citeyear{#1}:\,{#3})}}
-\newcommand{\citeslashyearpage}[3]{\hbox{(#2/\citeyear{#1}:\,#3)}}
-\newcommand{\citeslashpp}[3]{(\citeauthor{#1},~{#2/\citeyear{#1}:\,{#3})}}
-\newcommand{\citeslashA}[2]{\citeauthor{#1}~(#2/\citeyear{#1})}
-\newcommand{\citealppage}[2]{\citealp{#1}:\,{#2}}
+\def\zSp{\hskip0.16667em\relax} % thin breaking space
+%%%%%%%
+\newcommand{\citepage}[2]{\citeauthor{#1} {(\citeyear{#1}:\zSp{#2})}}
+\newcommand{\citepp}[2]{(\citealp{#1}:\zSp{#2})}
+\newcommand{\citeA}[1]{\citeauthor{#1} (\citeyear{#1})}
+\newcommand{\citeps}[2]{\citeauthor{#1}{'}s {(\citeyear{#1}:\zSp{#2})}}
+\newcommand{\cites}[1]{\citeauthor{#1}'s (\citeyear{#1})}
+\newcommand{\citeyearpage}[2]{\hbox{(\citeyear{#1}:\zSp{#2})}}
+\newcommand{\citeslashpage}[3]{\citeauthor{#1} {(#2/\citeyear{#1}:\zSp{#3})}}
+\newcommand{\citeslashyearpage}[3]{\hbox{(#2/\citeyear{#1}:\zSp#3)}}
+\newcommand{\citeslashpp}[3]{(\citeauthor{#1}, {#2/\citeyear{#1}:\zSp{#3})}}
+\newcommand{\citeslashA}[2]{\citeauthor{#1} (#2/\citeyear{#1})}
+\newcommand{\citealppage}[2]{\citealp{#1}:\zSp{#2}}
 %\renewcommand{\citep}[1]{(\citealp{#1})}
+
+\usepackage{hyphenat}
+\hyphenation{Mun-da-bli}
+
+
 
 \newcommand{\mc}[3]{\multicolumn{#1}{#2}{#3}}
 \newcommand{\SU}[1]{$^{\text{{#1}}}$}
@@ -81,7 +87,7 @@
 \newcommand{\sref}[1]{Section \ref{#1}}
 \newcommand{\tref}[1]{Table \ref{#1}}
 \newcommand{\fref}[1]{Figure \ref{#1}}
-\def\elicited{$^\diamond$}
+\def\elicited{\text{\llap{${}^\diamond$}}}
 % Miscellaneous symbols
 \def\goesto{$\rightarrow$\hspace{2pt}}
 \def\bad{\hspace{-5pt}*}
@@ -99,11 +105,14 @@
 % Special characters
 \def\KrnF{f\kern0.8pt{}} % for an f preceding a vowel with a left-spilling diacritic
 %\newcommand\Lbi{\ipabar{\tipaencoding \`\i}{.5ex}{1.1}{}{}}
-\newcommand\Lbi{\ipabar{\ipaclap{\i}{\rotatebox{0}{\emph{\raisebox{.06em}{\`{}}}}}}{.5ex}{1.1}{}{}}
-\newcommand\Hbi{\ipabar{\ipaclap{\i}{\rotatebox{0}{\emph{\raisebox{.06em}{\'{}}}}}}{.5ex}{1.1}{}{}}
+%\newcommand\Lbi{\ipabar{\ipaclap{\i}{\rotatebox{0}{\emph{\raisebox{.06em}{\`{}}}}}}{.5ex}{1.1}{}{}}
+\newcommand\Lbi{\`\bi}
+%\newcommand\Hbi{\ipabar{\ipaclap{\i}{\rotatebox{0}{\emph{\raisebox{.06em}{\'{}}}}}}{.5ex}{1.1}{}{}}
 %\newcommand\Hbi{\ipabar{\tipaencoding \'\i}{.5ex}{1.1}{}{}}
+\newcommand\Hbi{\'\bi}
 \newcommand\Mbi{\ipabar{\tipaencoding \=\i}{.5ex}{1.1}{}{}}
-\newcommand\MLbi{\ipabar{\ipaclap{\i}{\rotatebox{180}{\emph{\raisebox{-.76em}{\textlowrise{}}}}}}{.5ex}{1.1}{}{}}
+%\newcommand\MLbi{\ipabar{\ipaclap{\i}{\rotatebox{180}{\emph{\raisebox{-.76em}{\textlowrise{}}}}}}{.5ex}{1.1}{}{}}
+\newcommand\MLbi{\ML{\bi}}
 \renewcommand{\i}{ı}
 \def\@{ə}
 \def\eh{ɛ}
@@ -399,14 +408,18 @@ dialect of Mungbam.
 %difficult.
 \begin{table}[h!]
 \centering
-\begin{tabular}{llllll}
+\begin{tabular}{lll}
 \Hline
-Mundabli	&	Munken		&	gloss		&	Mundabli&	Munken		&	gloss			\\
+\textsc{Mundabli}	&	\textsc{Munken}		&	\textsc{gloss}\\
 \hline
-\ci{gb{\=\aw}}	&	\ci{\'u-kp\H{e}}	&	\gl{\cl3.house}	&	\ci{dz\=\aw}	&	\ci{\'\i-kp\H{e}}	&	\gl{\cl4.houses}	\\
-\ci{y\H{\ih}}	&	\ci{\'\i-dz\H{\eh}h\eh} &	\gl{\cl3.eye}	&	\ci{y\H{\ih}}	&	\ci{\'a-dz\H{\eh}h\eh}	&	\gl{\cl7a/\cl6.eyes}	\\
-\ci{k\=\oo}		&	\ci{\`a-k\ML{\@}f\@}	&	\gl{\cl7/\cl12.bone}	&	\ci{k\=\oo}	&	\ci{b\=\i-k\ML{\@}f\@}	&	\gl{\cl8.bones}		\\	% 26-may-2008 jcg tape
-\ci{\dzh\v{u}}	&	\ci{\`\i-b\'e}	&	\gl{\cl9.goat}	&	\ci{\dzh\H{u}}	&	\ci{\'\i-b\H{e}}	&	\gl{\cl10.goat}		\\
+\ci{gb{\=\aw}}	&	\ci{\'u-kp\H{e}}	&	\gl{\cl3.house} \\ 
+\ci{y\H{\ih}}	&	\ci{\'\i-dz\H{\eh}h\eh} &	\gl{\cl3.eye}	 \\ 
+\ci{k\=\oo}		&	\ci{\`a-k\ML{\@}f\@}	&	\gl{\cl7/\cl12.bone}	 \\ 
+\ci{\dzh\v{u}}	&	\ci{\`\i-b\'e}	&	\gl{\cl9.goat}	 \\ 
+\ci{dz\=\aw}	&	\ci{\'\i-kp\H{e}}	&	\gl{\cl4.houses}	\\
+\ci{y\H{\ih}}	&	\ci{\'a-dz\H{\eh}h\eh}	&	\gl{\cl7a/\cl6.eyes}	\\
+\ci{k\=\oo}	&	\ci{b\=\i-k\ML{\@}f\@}	&	\gl{\cl8.bones}		\\	% 26-may-2008 jcg tape
+\ci{\dzh\H{u}}	&	\ci{\'\i-b\H{e}}	&	\gl{\cl10.goat}		\\
 \Hline
 \end{tabular}
 \caption{Forms illustrating the loss of segmental noun class prefixes in Mundabli vs.
@@ -549,7 +562,7 @@ our discussion of accessibility.
 
 \subsection{Notes on terminology and transcription}\label{secTerminology}
 
-\fbox{Transcription} symbols used in the examples are mostly consistent
+{Transcription} symbols used in the examples are mostly consistent
 with the corresponding IPA symbols, with a few minor exceptions. 
 The use of the \ci{[\textsubumlaut{x}]} diacritic, normally reserved to indicate breathy voice,
 is used to indicate what has been described as pharyngealisation of
@@ -575,7 +588,7 @@ clause, and the term~\gl{representative of the head nominal}
 to refer to a noun {or pronoun} coreferent with the head nominal which
 occurs inside of
 the relative clause itself. 
-Both terms are due to~\citepage{lehmann:1986}{664,673}.
+Both terms are due to \citepage{lehmann:1986}{664, 673}.
 We also use the term~\gl{matrix NP}, due to~\citepage{andrews:2007}{206},
 to refer to the noun phrase
 headed by the head nominal. Likewise, we use~\gl{matrix clause} to
@@ -604,8 +617,9 @@ for a visiting field linguist to test hypotheses that they
 develop through the examination of texts, and is often
 the only sensible way to do so, given time constraints. Examples used in this
 paper, then, come from both elicited and naturally-occurring speech.
-Elicited sentences are indicated by a~\elicited~symbol in the free
-translation.
+Elicited sentences are indicated by a ${}^\diamond$~symbol in the free
+translation.\footnote{Ungrammatical examples (marked with an asterisk)
+do not require the ${}^\diamond$~symbol, since all are elicited.}
 
 %
 
@@ -662,7 +676,7 @@ the relative clause is internal to the matrix NP.
 \ex {\sc N} -- {\sc Poss} -- {\sc Dem} -- {\sc Rel} -- {\sc Det}	\label{constOrder}	%	exception in ngun 8-apr-2010 2v
 \ex \gll \uline{\'\i-s\HM{\eh}h{\eh}} m\'{\@} j\^{\eh}n n\'{\@} $[$\H{\ny}-\ny\'{\eh} m\={e} \ny\`{\eh}$]$ j\={\eh}	\\
 \cl4a-place {\sc 1sg.poss} {\sc \cl4}a.{\sc dem.prox} {\sc rel} \cl6a-water \cl6a.{\sc det} ({\sc a})stay.{\sc pfv} {\sc cl4.det}		\\
-\glt \elicited``This my place where there is water\dots'' (Munken)\footnotemark\label{mg01} %104v
+\glt \elicited`This my place where there is water\dots' (Munken)\footnotemark\label{mg01} %104v
 \end{exe}
 %
 \footnotetext{Glossing abbreviations are as follows:
@@ -719,7 +733,7 @@ ones.
 \begin{exe}
 \ex \gll \uline{\'\i-\sh\H{\eh}} j\={\eh} n\'{\@} $[$\uline{\'{\i}} gb\`e$]$ \'\i-bw\'{\ih}ns\'{\@} j\={\eh}	\\
 \cl10-fowl {\sc \cl10.det} {\sc rel} \cl10 ({\sc a})fall \cl10-red {\sc \cl10.det}	\\
-\glt \elicited``The fowls which fell are the red ones.'' (Munken)	\label{mg02}
+\glt \elicited`The fowls which fell are the red ones.' (Munken)	\label{mg02}
 \end{exe}
 %
 
@@ -781,18 +795,18 @@ the relativizer in Biya has grammaticalized from~\ci{-n\ih}~\gl{some, another}.
 \ex
 \gll \=\i-\sh\={\eh} j\={\i} \`a t\`u-\=a \={\i}-\sh{\=\eh} \`\i-n\={\ih}	\\
 \cl9-fowl \cl9.{\sc det} {\sc sbj} ({\sc a})peck-{\sc prf} \cl9-fowl \cl9-other	\\
-\glt \elicited``The fowl has pecked the other fowl.'' (Biya)
+\glt \elicited`The fowl has pecked the other fowl.' (Biya)
 %\gll \uline{\`u-n\`o} \`u-n\={\ih} $[$N\H{a}{\ng} f\H{\@} s\`el\`{\@} \uline{w\`{\@}}$]$ \`u kp\'u{\til}kp\H{e}	\\
 %\cl1-person \cl1-{\sc rel} N. {\sc p1} insult.{\sc pfv} {\sc \cl1.foc} {\sc \cl1.top} {\sc vfoc}{\til}die.{\sc pfv} \\
 %\glt ``The man whom Nang insulted died.'' (Biya)
 \ex
 \gll \uline{\=u-b\'{\i}} \=u-n\'{\ih} $[$\'u-kp\H{\@} k\={\@}-\ng{w\={a}{a}} s\=u kw\'{\i} \'a w\'ah\'a$]$ w\={\ih}	\\
 \cl3-year \cl3-{\sc rel} \cl3-house \cl7-book ({\sc a})start.{\sc irr} ({\sc c})enter.{\sc irr} {\sc prep} Zhoa {\sc \cl3.det}	\\
-\glt ``The year when the school at Zhoa was opened\dots'' (Biya)
+\glt `The year when the school at Zhoa was opened\dots' (Biya)
 \ex \label{mg101c}
 \gll w\v{\@} \uline{k\'{\@}-mj\H{\ih}} n\'{\ih} $[$\'\ny-\sh\^{\i} \'n-d\'e \sh\={\i} l\={e} k\={\@} j\ML{a}$]$	\\
 then \cl7-matter {\sc rel} 1sg-({\sc b})want 1sg-({\sc c})talk.{\sc irr} ({\sc a})discuss.{\sc irr} {\sc vent.irr} {\sc \cl7.foc} thus	\\
-\glt ``That's the problem that I want to talk about\dots'' (Biya)
+\glt `That's the problem that I want to talk about\dots' (Biya)
 \end{xlist}
 \end{exe}
 
@@ -843,11 +857,11 @@ translatable as~\gl{lest}.}
 \centering
 \begin{tabular}{lllll}
 \Hline
-variety	&	relativizer	&	\gl{some, another}	&\gl{reason}	&	\gl{own} (associative)\\
+\textsc{Variety}	&	\textsc{rel}	&	\gl{some}	&\gl{reason}	&	\gl{own} (associative)\\
 \hline
 Munken	&	\ci{n\'{\@}}		&	\ci{-l\eh}			&\ci{\'a-mj\H{u}}	&\ci{-\ny\@{m\@}}				\\
 Ngun	&	\ci{n\'{\ih}}	&	\ci{-ne}			&\ci{k\'{\@}-mj\H{\ih}}	&					\\	%9/11 22-apr-2010
-Biya	&	\ci{-n\ih}		&	\ci{-n\ih}			&\ci{k\'{\@}-mj\H{\ih}}	&\ci{-kj\ih}					\\
+Biya	&	\ci{\llap-n\ih}		&	\ci{-n\ih}			&\ci{k\'{\@}-mj\H{\ih}}	&\ci{-kj\ih}					\\
 Abar	&	\ci{\ny\'\i}		&	\ci{-lehe}			&\ci{k\'{\@}-\ny\H{u}} 	&\ci{-\ny{i}}				\\
 Missong	&	\ci{n\'a}		&	\ci{-l\eh}			&\ci{k\'\i-n\H{a}}		&\ci{-n\={\@}}			\\	%83v
 \Hline
@@ -913,15 +927,14 @@ a different speaker, the relativizer is present.
 \gll \v{a} \uline{fw\H{e}} $[$\`u \sh\^o fw\^om l\`an{\`\aw} k\={\aw} m\`{\eh} b\`\i-dz\={a}{\ng} b\={\i} fw\`{\@}mh\={\aw} w\`{\@} \'\i-d\=a{\ng} \`{\i} \ng\={\@}n$]$	\\
 {\sc ds.cop} there \cl1 ({\sc b})stay.day.{\sc ipfv} ({\sc b})struggle.{\sc ipfv} ({\sc a})walk.{\sc ipfv} {\sc ipfv}
 {\sc com} \cl8-fly \cl8.{\sc det} ({\sc a})disturb {\sc \cl1.foc} {\sc loc.\cl5-}comb \cl5.{\sc det} {\sc loc.}on	\\
-\glt ``It's there [i.e. that's why] he is constantly struggling with flies disturbing
-him [landing] on his comb.'' (Abar) % 6r 28-apr-2010
+\glt `Its there [i.e. that's why] he is constantly struggling with flies disturbing him [landing] on his comb.' (Abar) % 6r 28-apr-2010
 
 %%
 \ex	\label{exAbar124rb}
 \gll \`a l\H{\eh} \uline{fw\H{e}} \ny\'{\i} $[$\`u \sh\^o fw\^om l\`an{\`\aw} k\={\aw} m\`{\eh} b\`\i-dz\={a}{\ng} b\={\i} \'\i-d\=a{\ng} \`{\i} \ng\={\@}n$]$	\\
 {\sc ds} {\sc cop} there {\sc rel} \cl1 ({\sc b})stay.day.{\sc ipfv} ({\sc b})struggle.{\sc ipfv} ({\sc a})walk.{\sc ipfv} {\sc ipfv}
 {\sc com} \cl8-fly \cl8.{\sc det} {\sc loc.\cl5-}comb \cl5.{\sc det} {\sc loc.}on	\\
-\glt {``It is there that [i.e. that's why] he is constantly struggling with flies on his comb.'' (Abar)} 	%124r
+\glt {\elicited`It is there that [i.e. thats why] he is constantly struggling with flies on his comb.' (Abar)} 	%124r
 \end{xlist}
 \end{exe}
 %
@@ -945,7 +958,7 @@ pronoun will always follow the relativizer.
 \ex	\label{mg002a}
 \gll \uline{kp\`oa} n\'a $[$b\H{u} gb\`{\@}$]$ b\=u	\\
 five {\sc rel} \cl2 ({\sc a})fall {\sc \cl2.det}	\\
-\glt \elicited``The five that fell\dots'' (Missong)	% 42
+\glt \elicited`The five that fell\dots' (Missong)	% 42
 \end{exe}
 %
 
@@ -960,10 +973,10 @@ of a representative nominal in the relative clause.
 \begin{xlist}
 \ex     \gll \uline{\`mb\`\oo{\ng}} \ny\'{\i} $[$N\H{a}{\ng} h\H{a} l\Lbi{\ng}$]$ {\`\aw} \`u p\'\i\til{p\H{\i}}        \\
 \cl1.cow {\sc rel} N. {\sc p1} ({\sc a})look.for {\sc \cl1.det} \cl1 {\sc vfoc}\til{({\sc b})die} \\
-\glt \elicited``The cow that Nang looked for died.'' (Abar)      \label{mg03a}
+\glt \elicited`The cow that Nang looked for died.' (Abar)      \label{mg03a}
 \ex     \gll \uline{\`mb\`\oo{\ng}} \ny\'{\i} $[$N\H{a}{\ng} h\H{a} l\Lbi{\ng} \uline{w\`u}$]$ {\`u}{\footnotemark} \`u p\'\i\til{p\H{\i}}     \\
 \cl1.cow {\sc rel} N. {\sc p1} ({\sc a})look.for {\sc \cl1.foc} {\sc \cl1.det} \cl1 {\sc vfoc}\til{({\sc b})die}  \\
-\glt \elicited``The cow that Nang looked for [it] died.'' (Abar) \label{mg03b}
+\glt \elicited`The cow that Nang looked for [it] died.' (Abar) \label{mg03b}
 \end{xlist}
 \end{exe}
 %
@@ -986,8 +999,7 @@ Object-less locative phrases, however, are grammatical in main clauses as well
 \'\i-l\Hbi\={m} \`{\eh} \'a (\uline{k\={\i}}) m\={\i}$]$ k\`{\eh}  \\
 \cl7.{\sc dem.prox} {\sc \cl7.det} {\sc cop} \cl7-pan {\sc rel} \cl2 ({\sc a})put.{\sc ipfv}
 \cl4a-nkwi.bark \cl4a.{\sc det} {\sc prep} {\sc \cl7} {\sc loc.}in {\sc \cl7.det}   \\
-\glt \elicited``This is the dish that nkwi bark is put
-inside of.'' (Abar)
+\glt \elicited`This is the dish that nkwi bark is put inside of.' (Abar)
 \end{exe}
 %
 
@@ -1000,7 +1012,7 @@ itself (\ref{mg031}). %
 k\`{\@}m \'\i-\sh\H{\eh} j\={\eh} (b\={\@} \uline{w\`u})$]$	\\
 1sg-{\sc p1} {\sc vfoc}\til{see} \cl3-knife {\sc rel} N. {\sc p1} slaughter \cl10-fowl
 \cl10.{\sc det} ({\sc com} \cl3)	\\
-\glt \elicited``I did see the knife that Nang slaughtered the fowls (with it).'' (Munken)
+\glt \elicited`I did see the knife that Nang slaughtered the fowls (with it).' (Munken)
 \end{exe}
 %
 
@@ -1013,7 +1025,7 @@ as~\gl{there}, as in~(\ref{mg032}).
 \gll \=m-f\H{\@} ts\Hbi{n\til{ts\HM{\aw}\ng\aw}} \uline{\'\i-s\H{\eh}h\eh} n\'{\@} $[$N\H{a}{\ng} f\H{\@}
 k\`{\@}m \'\i-\sh\H{\eh} j\={\eh} (\uline{\'a f\=e})$]$	\\
 1sg-{\sc p1} {\sc vfoc}\til{({\sc b})see} \cl5-place {\sc rel} N. {\sc p1} ({\sc a})slaughter \cl10-fowl \cl10.{\sc det} (there)	\\
-\glt \elicited``I did see the place that Nang slaughtered the fowls (there).'' (Munken)	%104v
+\glt \elicited`I did see the place that Nang slaughtered the fowls (there).' (Munken)	%104v
 \end{exe}
 %
 
@@ -1041,19 +1053,19 @@ respectively.
 \ex \label{exMunkenVegetables}
 \gll \`u {\'\ng}k\Hbi\ng{k\Lbi}n j\`u{\aw} \ny\`a b\'\i-t\H{\@}m. m=\`u-\'u gj\LM{\eh}l{\@}	\\
 \cl1 now ({\sc a})cut.vegetables.{\sc ipfv} ({\sc a})stay.{\sc ipfv} \cl8-vegetables then=\cl1-{\sc fut} ({\sc a})cook.{\sc irr}	\\
-\glt ``Now she's cutting vegetables. Then she'll cook [them].'' (Munken) \label{mg04} % 5-apr-2010 1r
+\glt `Now she's cutting vegetables. Then she'll cook [them].' (Munken) \label{mg04} % 5-apr-2010 1r
 \ex	\label{exMunkenDresses}
 %
 \gll \'a-\ny\H{\i} b\'{\@} t\^{\i} w\^an b\'\i-b\^u{\ng} \'a k\={\i} m\`{\@}. b\'{\@} t\^{\i} w\^anh{\@}
 \'a-b\^u{\ng} \=a-l\'{\aw} \'u{\footnotemark}  m\`{\@}	\\
 \cl12-thing \cl2.{\sc top} ({\sc c})hang.{\sc ipfv} ({\sc b})keep.{\sc ipfv} \cl8-dress {\sc prep} \cl12 {\sc loc.}on \cl2
 ({\sc c})hang.{\sc ipfv} ({\sc b})keep.{\sc ipfv} \cl12-dress \cl12-some {\sc prep} {\sc loc.}on	\\
-\glt ``\dots a thing they hang dresses on. They're hanging a dress on [it].'' (Munken)	%	4-may-2010 1v
+\glt `\dots a thing they hang dresses on. They're hanging a dress on [it].' (Munken)	%	4-may-2010 1v
 %
 \ex	\label{exBiyaWater}
 \gll j\`{\eh} \`u f\ML{\eh} k\'{\@}-n\H{o} k\'{\@}-d\'u-l{\@} \={\ny}-\ny\'{\eh} 	\\
 {\sc comp} \cl1 ({\sc b})give.{\sc irr} \cl12-thing \cl12-({\sc b})carry.water-{\sc adj} \cl6a-water	\\
-\glt ``\dots that he should give [them] the thing for carrying water\dots'' (Biya)	%	16-apr 1r
+\glt `\dots that he should give [them] the thing for carrying water\dots' (Biya)	%	16-apr 1r
 \end{exe}
 %
 \footnotetext{The general-purpose preposition, normally having the form /\'a/, harmonizes to /\'u/ following
@@ -1076,18 +1088,18 @@ a relative clause may also be relativized (\ref{abar01a}).
 	\gll \uline{\`u-n\`o} n\'e $[$\uline{w\v{\@}} t\ML{e} m\`u \ny\ML{a}m dz\'{\eh} b\'{\eh}h\`{\eh} k\={o} \`\i-j\=a$]$	\\
 	\cl1-person {\sc rel} \cl1.{\sc fut} ({\sc b})come.{\sc irr} then.\cl1 ({\sc b})secretly.{\sc irr} ({\sc c})call.{\sc irr}
 	exit.{\sc irr} {go}.{\sc irr} \cl5-name	\\
-	\glt ``The person who comes and whispers [to me] the name\dots'' (Ngun) %9-jul 2v
+	\glt `The person who comes and whispers [to me] the name\dots' (Ngun) %9-jul 2v
 \z
 	\ea	\label{biya01a}
 	\gll \uline{b\`{\@}-mb\`{\aw}\ng{\=\@}} m\'{\@} n\'{\@} $[$N\H{a}{\ng} ts\H{a}m$]$ b\=e {p\'\i-\H{a}}	\\
 	\cl2-cow {\sc 1sg.poss} {\sc rel} N. ({\sc b})beat {\sc \cl2.det} ({\sc b})die	\\
-	\glt \elicited``My cows which Nang beat have died.'' (Munken) % p. 4v 2012
+	\glt \elicited`My cows which Nang beat have died.' (Munken) % p. 4v 2012
 \z
         \ea \label{munken03}
 
         \gll \uline{\'u-{\sh}\H{\eh}} m\`{\aw} $[$\`a {\sh}\`{\eh}l{\@} b\={\@} \uline{w\H{u}} \'u-kp\H{e} \'u-g{\j}\`{\eh}l{\@} m\=e$]$        \\
         \cl3-knife {\sc top} {\sc 2sg} {({\sc a})do.housework} {\sc com} {\sc \cl3} \cl3-house \cl3-({\sc a})cook.{\sc adj} {\sc loc}     \\
-        \glt ``That knife that you work with in the kitchen'' (Munken)  %       MK 04-05-2010 2V        00:03:18 tape 2
+        \glt `That knife that you work with in the kitchen\dots' (Munken)  %       MK 04-05-2010 2V        00:03:18 tape 2
 \z
 
 	\ea     \label{munken10}
@@ -1096,18 +1108,18 @@ a relative clause may also be relativized (\ref{abar01a}).
         f\H{\@} gb\`e   \\
         \cl1-person {\sc rel} {\sc 1sg} {\sc p2/3} ({\sc b})give \cl3-knife {\sc \cl1=dat} {\sc 1=}then
         {\sc p1} ({\sc a})fall \\
-        \glt \elicited``The man whom I gave a knife to fell.'' (Munken) % mk 13-jul 3r
+        \glt \elicited`The man whom I gave a knife to fell.' (Munken) % mk 13-jul 3r
 \z
 
 \ea	\label{missong01a}
 	\gll \uline{\`\ng-gb\`{\@}-n\`{\@}} n\'a $[$N\H{a}{\ng} k\'a gb\`{\@} \uline{w\={\@}} m\=\i$]$ w\=u k\'a b\Hbi\til{b\=ah\=a}	\\
 	\cl1.{\sc nmlz}-({\sc a})fall-{\sc nmlz} {\sc rel} N. {\sc p1} ({\sc a})fall \cl1 {\sc loc.}at {\sc \cl1.det} {\sc p1} {\sc vfoc}\til{({\sc c})bad}	\\
-	\glt \elicited``The way that Nang fell [i.e. the falling that Nang fell on] was bad.''  (Missong) % p.43 2012
+	\glt \elicited`The way that Nang fell [i.e. the falling that Nang fell on] was bad.'  (Missong) % p.43 2012
 \z
 \ea 	\label{abar01a}
 	\gll {u}-w\`{\@}n\`{\aw} \`u l\H{\eh} \uline{\`u-n\`o} {\ny}\={\i} $[$\'n={\dzh}\=a \=\i-{\sh}\ML{\eh} \uline{j\`{\i}}$]$       \\
         \cl1-{\sc dem.prox} \cl1 ({\sc b}){\sc cop} \cl1-person {\sc rel} {\sc 1sg}=({\sc a})steal.{\sc irr} \cl9-fowl {\sc 3sg.poss}     \\
-        \glt \elicited``This one is the man whose fowl I stole.'' (Abar) % AB 14-07-10-2V
+        \glt \elicited`This one is the man whose fowl I stole.' (Abar) % AB 14-07-10-2V
 \z
 
 %
@@ -1120,12 +1132,12 @@ is given in~\pref{mg06aa}).
 \ex \label{mg06aa1}
 \gll \=n-ts\Lbi{ts\LM{a}} \uline{\'a-mj\H{u}} n\'{\@} $[$N\H{a}{\ng} f\H{\@} \ny\`\oo{n\@} b\={\@} \'\i-w\H{\aw}{\ng} j\={\eh}$]$ k\={\@}      \\
 {\sc 1sg}-{\sc vfoc}\til{know} \cl7-matter {\sc rel} N. {\sc p1} fight {\sc com} \cl10-pig {\sc \cl10.det} {\sc \cl7.det}  \\
-\glt \elicited``I know the reason that Nang was fighting with the pigs.''
+\glt \elicited`I know the reason that Nang was fighting with the pigs.'
 (Munken) %p.105
 \ex \label{mg06aa}
 \gll \=m-b\`{\aw}f{\@} \'a-mj\H{u} \'u-kp\HM{\aw}f{\@} m\'{\@}	\\
 {\sc 1sg-}ask.{\sc ipfv} \cl12-matter \cl3-money {\sc 1sg.poss}	\\
-\glt ``I'm asking because of my money.'' (Munken)	%	12-may-2010 5v
+\glt `I'm asking because of my money.' (Munken)	%	12-may-2010 5v
 %[i.e. I know why Nang was fighting with the pigs.] 
 \end{exe}
 
@@ -1140,7 +1152,7 @@ role is not obvious, as in~(\ref{mg06}).
 \begin{exe}
 \ex \gll \`\i-j\={\@}n{\@} \uline{\`\i-\ny\ML{\i}} n\'{\@} $[$\`u-n\`{\eh} \ny\`{\eh} \`u ts\ML{\@}n$]$	\\
 \cl5-{\sc dem.prox} \cl5-honey {\sc rel} \cl1-person ({\sc a})stay.{\sc pfv} \cl1 ({\sc b})be.drunk.{\sc irr}	\\
-\glt ``This is the honey that a person can get drunk [on].'' (Munken)
+\glt `This is the honey that a person can get drunk [on].' (Munken)
 %[i.e. Drinking this honey can make someone drunk.] 
 \label{mg06} %p.119
 \end{exe}
@@ -1162,7 +1174,7 @@ relative clauses by most commentators, e.g., \citepage{downing:1978}{378},
 \gll \uline{\`\i-\dzh\={\i}} \`\i-n\={\ih} $[$b\H{u} gb\`a \ny\`a k\={\@}-t\={\aw} k\={\@}$]$ n\`{\aw} b\^a{\ng} \ny\`a m\={\@}	\\
 \cl5-sound \cl5-{\sc rel} \cl2 ({\sc a})cut.{\sc ipfv} ({\sc a})stay.{\sc ipfv} \cl7-tree {\sc \cl7.det} ({\sc a})make.{\sc ipfv}
 ({\sc b})block.{\sc ipfv} ({\sc a})stay.{\sc ipfv} {\sc 1sg.foc}	\\
-\glt \elicited``The sound of them cutting the tree disturbs me.'' (Biya)	
+\glt \elicited`The sound of them cutting the tree disturbs me.' (Biya)	
 \z
 
 %[i.e. The sound of them cutting the tree disturbs me.] 
@@ -1179,7 +1191,7 @@ relative clauses by most commentators, e.g., \citepage{downing:1978}{378},
 \gll \uline{\'a-mj\H{u}} n\'{\@} $[$b\'\@-kj\HM{\ih}{\ng} b\=e \dzh\`a \`\i-\sh\ML{\eh} m\ML{\@}$]$ k\={\@} fw\H{\@}mf{\@} m\ML{\@}	\\
 \cl12-matter {\sc rel} \cl2-children {\sc \cl2.det} ({\sc a})steal {\sc \cl9-fowl} {\sc 1sg.poss} {\sc \cl12.det}
 ({\sc b})worry {\sc 1sg.foc}	\\
-\glt\elicited``The fact that the children stole my fowl concerns me.'' (Munken)	%4v
+\glt\elicited`The fact that the children stole my fowl concerns me.' (Munken)	%4v
 \z
 }
 
@@ -1187,7 +1199,7 @@ relative clauses by most commentators, e.g., \citepage{downing:1978}{378},
 \ea	\label{mg0995a}
 \gll b\'{\@} kw\H{\eh} \uline{\`\i-t\`u} \uline{\'u-kp\H{e}} $[$b\'{\@} kw\H{\eh} \'u-kp\H{\aw}h{\aw}$]$	\\
 \cl2 ({\sc b})have \cl5-species \cl3-house \cl2 ({\sc b})have \cl3-money	\\
-\glt ``They have the kind of house that makes it seem like they have money.'' (Munken) %2r 16-jul2010
+\glt `They have the kind of house [that suggests that] they have money.' (Munken) %2r 16-jul2010
 \z
 %
 
@@ -1231,15 +1243,15 @@ no such difficulty arises.
 %
 \ea	\gll N\H{a}{\ng} f\H{\@} b\`an \'u-kp\H{e} w\={\@} *(\'a f\`{\@}m\={\@})	\\
 N. {\sc p1} ({\sc a})climb \cl3-house {\sc \cl3.det} {\sc  prep} {\sc loc.top}		\\
-\glt \elicited``Nang climbed *(on top of) the house.'' (Munken)	\label{mg05b}
+\glt \elicited`Nang climbed *(on top of) the house.' (Munken)	\label{mg05b}
 \z
 \ea	\gll N\H{a}{\ng} f\H{\@} b\Lbi{m}\til{b\ML{a}n}	\\
 N. {\sc p1} {\sc vfoc}\til{({\sc a})climb}	\\
-\glt \elicited``Nang climbed.'' (Munken)	\label{mg05a}
+\glt \elicited`Nang climbed.' (Munken)	\label{mg05a}
 \z
 \ea	\gll \=m-f\H{\@} ts\H{\aw}{\ng} \uline{\'u-kp\H{e}} n\'{\@} $[$N\H{a}{\ng} f\H{\@} b\`an (\'a \uline{w\=u} f\`{\@}m\={\@})$]$ w\={\@}	\\ % p.104v
 1sg-{\sc p1} ({\sc b})see \cl3-house {\sc rel} N. {\sc p1} ({\sc a})climb {\sc prep} \cl3 {\sc loc.top} {\sc \cl3.det}	\\
-\glt \elicited``I saw the house that Nang (climbed~/~climbed on top of).'' (Munken)	\label{mg05c}
+\glt \elicited`I saw the house that Nang (climbed~/~climbed on top of).' (Munken)	\label{mg05c}
 \z
 
 %
@@ -1289,17 +1301,17 @@ can be verified against those given in~\tref{tblConjugation}.
 \ex	\label{exMGtense01}
 \gll \`\i-j\={\@}n d\`a \uline{\`\i-bw\'{\aw}} \`\i-n\={\ih} $[$N\H{a}{\ng} f\H{\@} bw\H{\aw}$]$ n\'{\@}	\\
 \cl5-{\sc dem.prox} {\sc neg} \cl5-({\sc b})tired.{\sc inf} \cl5-other N. {\sc p1} ({\sc b})tired {\sc frust}	\\
-\glt \elicited``This is not the fatigue that Nang was tired [i.e. that Nang experienced].''  ({\sc p1}, Biya) %78r
+\glt \elicited`This is not the fatigue that Nang was tired [i.e. that Nang experienced].'  ({\sc p1}, Biya) %78r
 %
 \ex	\label{exMGtense02}
 \gll \v{a} \uline{\`u-n\`o} \ny\'{\i} $[$M\^{u} k\`{\@} l\`e t\^{\oo} \`\i-bw\'{e} K\'ul\'{\aw}-n\'e$]$	\\
 {\sc ds.cop} \cl1-person {\sc rel} M. {\sc p2/3}{\footnotemark} ({\sc a})make ({\sc c})show \cl9-goat K.-{\sc dat}	\\
-\glt \elicited``This is the person$_i$ by whom$_i$ Mu made the goat be shown to Kulo.'' ({\sc p2}, Abar)	%	2r 5-jul-2000
+\glt \elicited`This is the person$_i$ by whom$_i$ Mu made the goat be shown to Kulo.' ({\sc p2}, Abar)	%	2r 5-jul-2000
 \ex	\label{exMGtense03}
 \gll f\ML{\eh} w\`u b=\uline{\'u-t\H{\aw}f{\@}} n\'{\@}m\={\aw} w\={\@}, \`u n\'{\@} $[$\`a l\=e f\ML{\eh} d\=a$]$ w\={\@} \\
 ({\sc b})give.{\sc irr} \cl1.{\sc foc} {\sc com=}\cl3-sense {\sc top} {\sc \cl3.det} \cl1.{\sc top} {\sc rel} {\sc 2sg.top}
 {\sc p2/3} ({\sc b})give.{\sc irr} before {\sc \cl3.det}	\\ % 2r 26-jul-2010 (check this tone?)
-\glt ``Give him that wisdom, the one which you have given before [to others].'' ({\sc p3}, Munken) 
+\glt `Give him that wisdom, the one which you have given before [to others].' ({\sc p3}, Munken) 
 \end{exe}
 %
 \footnotetext{The tense markers for {\sc p2} and {\sc p3} are identical in all Mungbam varieties
@@ -1346,10 +1358,10 @@ of the head nominal is not the term which is in focus.
 \begin{xlist}
 \ex \gll \uline{\`u-n\`{\eh}} n\'{\@} $[$\`a gb\`e \uline{w\`u}$]$ w\={\@} \`u p\'\i{\til}p\H{\i}	\\
 \cl1-person {\sc rel} {\sc ds} ({\sc a})fall {\sc \cl1.foc} {\sc \cl1.det} \cl1 {\sc vfoc}\til{({\sc b})die}	\\
-\glt \elicited``The man$_i$ that \uline{he$_i$} fell died.'' (Munken)	\label{mg102a}
+\glt \elicited`The man$_i$ that \uline{he$_i$} fell died.' (Munken)	\label{mg102a}
 \ex	\gll \uline{\`u-n\`{\eh}} n\'{\@} $[$\`a \sh\^{\eh} N\H{a}{\ng} \uline{w\`u}$]$ w\={\@}  \`u p\'\i{\til}p\H{\i}	\\
 \cl1-person {\sc rel} {\sc ds} ({\sc c})insult N. {\sc \cl1.foc} {\sc \cl1.det} \cl1 {\sc vfoc}\til{({\sc b})die}	\\
-\glt \elicited``The man$_i$ that \uline{Nang} insulted him$_i$ died.'' (Munken)	\label{mg102b}
+\glt \elicited`The man$_i$ that \uline{Nang} insulted him$_i$ died.' (Munken)	\label{mg102b}
 \end{xlist}
 \end{exe}
 %
@@ -1366,7 +1378,7 @@ displays the areally prevalent SOV word order found in some negated clauses
 \ex \label{mg103}
 	\gll \uline{\`u-n\={\eh}} n\'{\@} $[$N\H{a}{\ng} \uline{w\`u} \'a \sh\={\eh} h\={\@}$]$ w\={\@} \`u p\'\i{\til}p\H{\i}	\\
 \cl1-person {\sc rel} N. {\sc \cl1.foc} {\sc neg} ({\sc a})insult.{\sc irr} {\sc neg2} {\sc \cl1.det} \cl1 {\sc vfoc}\til{({\sc b})die}	\\
-\glt \elicited``The man$_i$ that Nang did not insult him$_i$ died.'' (Munken)	%	86r
+\glt \elicited`The man$_i$ that Nang did not insult him$_i$ died.' (Munken)	%	86r
 \end{exe}
 %
 
@@ -1411,7 +1423,7 @@ Corresponding sentences with a non-reduplicated verb are ungrammatical \pref{exB
 \ex \label{exBiya1045a}
 \gll N\H{a}{\ng} gb\`u{\til}gb\ML{e}	\\
 N. {\sc vfoc}\til{({\sc a})fall}	\\
-\glt \elicited``Nang has fallen.'' (Biya)	%73v
+\glt \elicited`Nang has fallen.' (Biya)	%73v
 %\ex \label{exBiya1045b}
 %\gll N\H{a}{\ng} f\H{\@}fj\^{\aw}{\ng} gb\`u\til{gb\ML{e}}	\\
 %N. {\sc loc.}stream {\sc vfoc}\til{fall}	\\
@@ -1419,14 +1431,14 @@ N. {\sc vfoc}\til{({\sc a})fall}	\\
 \ex \label{exBiya1045c}
 \gll N\H{a}{\ng} \'\i-bw\H{e} j\={\i} k\Lbi\ng\til{k\ML{\@}}m	\\
 N. \cl10-goat \cl10.{\sc det} {\sc vfoc}\til{({\sc a})slaughter}	\\
-\glt \elicited``Nang did slaughter the goats.'' (Biya)% 73v
+\glt \elicited`Nang did slaughter the goats.' (Biya)% 73v
 \end{xlist}
 %%%
 \ex \label{exBiya1046}
 \begin{xlist}
 \ex \ci{*N\H{a}{\ng} gb\`e}
 %\ex *N\H{a}{\ng} f\H{\@}fj\^{\aw}{\ng} gb\`e	
-\ex \ci{*N\H{a}{\ng} \'\i-bw\H{e} j\={\i} k\`{\@}m}
+\ex \ci{ {*}N\H{a}{\ng} \'\i-bw\H{e} j\={\i} k\`{\@}m}
 \end{xlist}
 \end{exe}
 %%
@@ -1436,8 +1448,8 @@ The ban on reduplication in negated clauses is illustrated in~\pref{exAbar1041}.
 \ex \label{exAbar1041}
 \begin{xlist}
 \ex	\gll N\H{a}{\ng} \'a b\'am h\={\aw}	\\
-N. {\sc neg} ({\sc c})ascend.{\sc irr} {\sc neg}	\\
-\glt ``Nang did not accept.'' (Abar) %19
+N. {\sc neg} ({\sc c})accept.{\sc irr} {\sc neg}	\\
+\glt \elicited`Nang did not accept.' (Abar) %19
 \ex	\ci{*N\H{a}{\ng} \'a b\'um{\til}b\=am h\={\aw}}	 
 \end{xlist}
 \end{exe}
@@ -1456,18 +1468,18 @@ of verum focus marking (cf. the grammaticalness of~\pref{mg1048b}).
 \ex \label{mg1047}
 \gll \`a gb\`e N\H{a}{\ng}	\\
 {\sc ds} ({\sc a})fall N.	\\
-\glt \elicited``\uline{Nang} fell.'' (Biya) %73v
+\glt \elicited`\uline{Nang} fell.' (Biya) %73v
 \ex
 \gll N\H{a}{\ng} k\`{\@}m \'\i-bw\H{e} j\={\i} f\H{\@}fj\^{\aw}{\ng}	\\
 N. ({\sc a})slaughter \cl10-goat \cl10.{\sc det} {\sc loc.}stream	\\
-\glt \elicited``Nang killed the goats at the stream.'' (Biya) 	%73v
+\glt \elicited`Nang killed the goats at the stream.' (Biya) 	%73v
 \end{xlist}
 \ex \label{mg1048}
 \begin{xlist}
 \ex \label{mg1048a}
 \ci{*\`a gb\`u{\til}{gb\ML{e}} N\H{a}{\ng}	}
 \ex \label{mg1048b}
-\ci{N\H{a}{\ng} k\Lbi{\ng}{\til}k\ML{\@}m \'\i-bw\H{e} j\={\i} f\H{\@}fj\^{\aw}{\ng}	}
+\ci{\elicited N\H{a}{\ng} k\Lbi{\ng}{\til}k\ML{\@}m \'\i-bw\H{e} j\={\i} f\H{\@}fj\^{\aw}{\ng}	}
 \end{xlist}
 \end{exe}
 %%
@@ -1494,11 +1506,11 @@ verb may \uline{not} be reduplicated.
 \ex	\label{mg104a}
 \gll \uline{\`mb\`\oo{\ng}} \ny\'{\i} $[$N\H{a}{\ng} h\H{a} \{l\Lbi\ng~/~l\Lbi{n}\til{l\MLbi\ng}\}$]$ \`{\aw} \`u p\'\i{\til}p\H{\i}	\\
 \cl1.cow {\sc rel} N. {\sc p1} (({\sc a})look~/~{\sc vfoc}\til{({\sc a})look}) {\sc \cl1.det} \cl1 {\sc vfoc}\til{({\sc b})die}	\\
-\glt \elicited``The cow that Nang \{looked for~/~did look for\} died.'' (Abar)
+\glt \elicited`The cow that Nang \{looked for~/~did look for\} died.' (Abar)
 \ex	\label{mg104b}
 \gll \uline{\`mb\`\oo{\ng}} \ny\'{\i} $[$N\H{a}{\ng} h\H{a} \{l\Lbi\ng~/~*l\Lbi{n}\til{l\MLbi\ng}\} \uline{w\`u}$]$ \`{u}{\footnotemark} \`u p\'\i{\til}p\H{\i}	\\
 \cl1.cow {\sc rel} N. {\sc p1} \{({\sc a})look~/~{\sc vfoc}\til{({\sc a})look}\} {\sc \cl1.foc} {\sc \cl1.det} \cl1 {\sc vfoc}\til{({\sc b})die}	\\
-\glt \elicited``The cow$_i$ that Nang (looked for~/~*did look for) it$_i$ died.'' (Abar) % 	81
+\glt \elicited`The cow$_i$ that Nang (looked for~/~*did look for) it$_i$ died.' (Abar) % 	81
 \end{xlist}
 \end{exe}
 %
@@ -1540,11 +1552,11 @@ believed that some number of pigs other than three were beaten.
 \gll \'\i-j\^{\@}n j\={\i} \uline{\'\i-g\H{\aw}{\ng}} m\H{\@} \=\i-n\'{\ih} $[$N\H{a}{\ng} f\H{\@} \tch\H{a}m \uline{\'\i-t\={\eh}}$]$ j\={\i}	\\
 \cl10-{\sc 10.dem} {\sc \cl10.det} \cl10-pig {\sc 1sg.poss} \cl10-{\sc rel} N.
 {\sc p1} ({\sc b})beat \cl10-three {\sc \cl10.det} 	\\
-\glt \elicited``These are my pigs that Nang beat three [of them].'' (Biya) % 9v 2012
+\glt \elicited`These are my pigs that Nang beat three [of them].' (Biya) % 9v 2012
 \ex \label{by1012-mc}
 \gll N\H{a}{\ng}  {\'\i-g\H{\aw}{\ng}} m\H{\@} \`a \tch\H{a}m \'\i-t\={\eh}	\\
 N. \cl10-pig {\sc 1sg.poss} {\sc ds} ({\sc b})beat \cl10-three	\\
-\glt \elicited``Nang beat \uline{three} of my pigs.'' (Biya) % 9r
+\glt \elicited`Nang beat \uline{three} of my pigs.' (Biya) % 9r
 \end{exe}
 %
 
@@ -1564,7 +1576,7 @@ intransitive clauses with a non-reduplicated verb, as in~\pref{exBy1013}.
 \ex	\label{exBy1013}
 \gll \uline{\`u-n\`o} \`u-n\={\ih} $[$\uline{\`u} gb\`e$]$ w\={\@} \`u kp\'u\til{kp\H{e}}	\\
 \cl1-person \cl1-{\sc rel} \cl1.{\sc top} ({\sc a})fall {\sc \cl1.det} \cl1.{\sc top} {\sc vfoc}\til{({\sc b})die}	\\
-\glt ``The man who fell died.'' (Biya)	% 86r
+\glt \elicited`The man who fell died.' (Biya)	% 86r
 \end{exe}
 %%
 
@@ -1902,7 +1914,7 @@ It is unlikely that it was the other way round. First, ``oral histories regardin
 \ex \label{exNaki}
 \gll \uline{{\ng}k\MH{u}{\ng}} w{\`\i} $[$\uline{l'} \`aj{\=\i} w{\`\@} \=un{\=\@}$]$	\\
 \cl1.chief \cl1.{\sc ass} 3s ({\sc a})eat.{\sc ipfv.p1.dsf} \cl1.{\sc det} \cl14.fufu	\\
-\glt  \elicited ``the chief that was eating fufu'' (Naki) (Jeff Good p.c.)
+\glt  \elicited `the chief that was eating fufu' (Naki) (Jeff Good p.c.)
 \end{exe}
 %%
 
@@ -2496,7 +2508,7 @@ clauses contain a different final vowel from corresponding
 main clauses, which effectively indicates that the host verb
 is part of a relative clause:
 %
-\vbox{
+
 \begin{exe}
 \ex	\label{exShinga}
 \begin{xlist}
@@ -2511,7 +2523,7 @@ is part of a relative clause:
 \glt ``The thief who stole an elephant ran away.'' \citepp{patin:2010}{196--7}
 %%
 \end{xlist}
-\end{exe}}
+\end{exe}
 
 As we speculate in~\sref{secMundabliGsource}, the double-marking
 of Mundabli relative clauses might be explainable as the result
